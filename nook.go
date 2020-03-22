@@ -7,8 +7,8 @@ import (
 	"os"
 	"time"
 
+	ircevent "github.com/thoj/go-ircevent"
 	"github.com/zserge/webview"
-	"github.com/thoj/go-ircevent"
 )
 
 // variables
@@ -54,31 +54,31 @@ func irc() {
 		ircobj.Join("#letirc")
 		ircobj.Privmsg("#letirc", "send with <3 from nook")
 		ircobj.AddCallback("PRIVMSG", func(event *ircevent.Event) {
-			go newMessage(event.Nick, event.Message())
-		});
+			go newMessage(event.Nick, event.Message(), "message")
+		})
 	})
 	ircobj.Connect("irc.rizon.net:7000")
 }
 
 func newMessage(user string, message string, action string) {
-    js := "newMessage(\"" + user + "\", \"" + message + "\", \"" + action + "\");"
-    inject("message", js)
+	js := "newMessage(\"" + user + "\", \"" + message + "\", \"" + action + "\");"
+	inject("message", js)
 }
 
 func changeChannel(server string, channel string) {
-    wv.Bind("changeChannel", func() {
-        fmt.Println(server, channel)
-    })
+	wv.Bind("changeChannel", func() {
+		fmt.Println(server, channel)
+	})
 }
 
 func inject(action string, js string) {
-    wv.Dispatch(func() {
-        switch action {
-        case "message":
-            wv.Eval(js)
-        }
-    // add other injections here
-    })
+	wv.Dispatch(func() {
+		switch action {
+		case "message":
+			wv.Eval(js)
+		}
+		// add other injections here
+	})
 }
 
 // execution
