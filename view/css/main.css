@@ -51,6 +51,9 @@ body .buffer {
   grid-column-start: span 5;
   margin: 0 0 2rem 0;
 }
+body .buffer li {
+  display: flex;
+}
 body .buffer .name {
   display: inline-block;
   color: #878E96;
@@ -58,7 +61,7 @@ body .buffer .name {
   text-align: right;
 }
 body .buffer .name.msg::after {
-  content: " said";
+  content: "";
   margin: 0 1rem 0 0;
   color: #6e757c;
 }

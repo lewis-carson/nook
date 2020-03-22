@@ -89,6 +89,10 @@ body {
         grid-column-start: span 5;
         margin: 0 0 2rem 0;
 
+        li {
+            display: flex;
+        }
+
         .name {
             display: inline-block;
             color: $color-foreground-dark;
@@ -96,7 +100,7 @@ body {
             text-align: right;
 
             &.msg::after {
-                content: " said";
+                content: "";
                 margin: 0 $rg 0 0;
                 color: $color-foreground-darker;
             }
