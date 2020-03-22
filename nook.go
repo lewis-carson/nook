@@ -52,7 +52,7 @@ func irc() {
 	ircobj := ircevent.IRC("nook", "nook")
 	ircobj.AddCallback("001", func(e *ircevent.Event) {
 		ircobj.Join("#letirc")
-		ircobj.Privmsg("#letirc", "send with <3 from nook")
+		//ircobj.Privmsg("#letirc", "send with <3 from nook")
 		ircobj.AddCallback("PRIVMSG", func(event *ircevent.Event) {
 			go newMessage(event.Nick, event.Message(), "message")
 		})
