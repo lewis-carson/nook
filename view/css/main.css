@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   box-sizing: border-box;
 }
@@ -60,17 +61,27 @@ body .buffer .name {
   width: 15vw;
   text-align: right;
 }
-body .buffer .name.msg::after {
+body .buffer .name.message::after {
   content: "";
   margin: 0 1rem 0 0;
   color: #6e757c;
 }
 body .buffer .name.join::after {
-  content: " joined";
+  content: " ⟶";
   margin: 0 1rem 0 0;
   color: #6e757c;
 }
-body .buffer .message {
+body .buffer .name.quit::after {
+  content: " ⟵";
+  margin: 0 1rem 0 0;
+  color: #6e757c;
+}
+body .buffer .name.part::after {
+  content: " ⟵";
+  margin: 0 1rem 0 0;
+  color: #6e757c;
+}
+body .buffer .content {
   width: 65vw;
   float: right;
 }

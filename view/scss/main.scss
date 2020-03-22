@@ -99,20 +99,32 @@ body {
             width: 15vw;
             text-align: right;
 
-            &.msg::after {
+            &.message::after {
                 content: "";
                 margin: 0 $rg 0 0;
                 color: $color-foreground-darker;
             }
 
             &.join::after {
-                content: " joined";
+                content: " ⟶";
+                margin: 0 $rg 0 0;
+                color: $color-foreground-darker;
+            }
+
+            &.quit::after {
+                content: " ⟵";
+                margin: 0 $rg 0 0;
+                color: $color-foreground-darker;
+            }
+
+            &.part::after {
+                content: " ⟵";
                 margin: 0 $rg 0 0;
                 color: $color-foreground-darker;
             }
         }
 
-        .message {
+        .content {
             width: 65vw;
             float: right;
         }

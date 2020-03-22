@@ -50,44 +50,29 @@ func irc() {
 
 	user := "tom nook"
 	message := "sent from golang!"
-	newMessage(user, message)
+	action := "message"
+	newMessage(user, message, action)
 }
 
-func newMessage(user string, message string) {
-	js := `
-	log = document.getElementById("log");
-	line = document.createElement("li");
-	userName = document.createElement("a");
-	userNameSpan = document.createElement("span");
-	userMessageSpan = document.createElement("span");
+func newMessage(user string, message string, action string) {
+	js := "newMessage(\"" + user + "\", \"" + message + "\", \"" + action + "\");"
+	inject("message", js)
+}
 
-	userText = document.createTextNode("` + user + `");
-	userMessage = document.createTextNode(" ` + message + ` ");
+func changeChannel(server string, channel string) {
+	wv.Bind("changeChannel", func() {
+		fmt.Println(server, channel)
+	})
+}
 
-	log.appendChild(line);
-	line.appendChild(userNameSpan).classList.add("name", "msg")
-
-	userNameSpan.appendChild(userName);
-	userName.appendChild(userText);
-
-	line.appendChild(userMessageSpan).classList.add("message");
-	userMessageSpan.appendChild(userMessage);`
-
+func inject(action string, js string) {
 	wv.Dispatch(func() {
-		fmt.Println("trying to inject msg...")
-		wv.Eval(js)
+		switch action {
+		case "message":
+			wv.Eval(js)
+		}
+		// add other injections here
 	})
-}
-
-func sendMessage() {
-	err := wv.Bind("sendMessage", func() string {
-		// fmt.Println()
-		return "<message>"
-	})
-
-	if err != nil {
-		panic(err)
-	}
 }
 
 // execution

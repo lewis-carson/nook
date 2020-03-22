@@ -10,20 +10,20 @@
         <ul class="server">
             <span class="server-name">server</span>
             <div class="server-channels">
-                <li><a href="#" class="active">#channel</a></li>
-                <li><a href="#">#channel2</a></li>
+                <li><a href="#" class="active" onclick="changeChannel()">#channel</a></li>
+                <li><a href="#" onclick="changeChannel()">#channel2</a></li>
             </div>
         </ul>
     </section>
     <section id="buffer" class="buffer">
         <div class="wrapper">
             <ul id="log">
+                <li><span class="name join"><a href="#">user2</a></span></li>
                 <li><span class="name join"><a href="#">user</a></span></li>
-                <li><span class="name msg"><a href="#">user2</a></span><span class="message">hello</span></li>
-                <li><span class="name msg hidden"><a href="#">user2</a></span><span class="message">how are you</span></li>
-                <li><span class="name msg"><a href="#">user</a></span><span class="message">yes</span></li>
+                <li><span class="name message"><a href="#">user2</a></span><span class="content">hello</span></li>
+                <li><span class="name message hidden"><a href="#">user2</a></span><span class="content">how are you</span></li>
+                <li><span class="name message"><a href="#">user</a></span><span class="content">yes</span></li>
             </ul>
-            <!-- <button onclick="addMessage()">add message</button> -->
         </div>
         <div class="input">
             <input type="text">
