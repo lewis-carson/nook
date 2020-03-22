@@ -1,3 +1,3 @@
-nook (wip)
+nook (snake oil wip)
 ----
-a simple, cross-platform irc client
+nothing has been implemented yet, don't expect this to work.

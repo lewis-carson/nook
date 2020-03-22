@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  width: 100vw;
+  height: 100vh;
+  color: #B6BAC0;
+  background: #1F2022;
+  font-family: "Helvetica Neue", "Helvetica", sans-serif;
+}
+body a {
+  color: #878E96;
+  text-decoration: none;
+  transition: all 125ms ease-in-out;
+}
+body a:hover {
+  color: #D1D4DA;
+}
+body ul {
+  list-style-type: none;
+  line-height: 1.5rem;
+  padding: 0;
+}
+body li {
+  vertical-align: middle;
+}
+body .nav {
+  background: #1b1c1d;
+  color: #D1D4DA;
+  padding: 0 1.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.125);
+  overflow-x: hidden;
+  width: 20vw;
+}
+body .nav::-webkit-scrollbar {
+  display: none;
+}
+body .nav .server .server-channels {
+  margin: 0.5rem 0 0 1rem;
+}
+body .nav .server .server-channels .active {
+  color: #5b67ec;
+}
+body .buffer {
+  display: grid;
+  max-height: 100vh;
+  overflow-x: hidden;
+  grid-column-start: span 5;
+  margin: 0 0 2rem 0;
+}
+body .buffer .name {
+  display: inline-block;
+  color: #878E96;
+  width: 15vw;
+  text-align: right;
+}
+body .buffer .name.msg::after {
+  content: " said";
+  margin: 0 1rem 0 0;
+  color: #6e757c;
+}
+body .buffer .name.join::after {
+  content: " joined";
+  margin: 0 1rem 0 0;
+  color: #6e757c;
+}
+body .buffer .message {
+  width: 65vw;
+  float: right;
+}
+body .buffer .hidden {
+  visibility: hidden;
+}
+body .buffer .separator {
+  display: flex;
+  justify-content: flex-start;
+  background: rgba(255, 255, 255, 0.125);
+  width: 1px;
+  margin: 0 1rem;
+}
+body .input {
+  width: -webkit-fill-available;
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.125);
+}
+body .input input {
+  width: inherit;
+  padding: 0.5rem;
+  color: #B6BAC0;
+  background: #222325;
+  border: 0;
+}
+body .input input:focus, body .input input:active {
+  outline: none;
+}

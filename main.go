@@ -1,58 +1,48 @@
-// ???
 package main
 
 
-// import libraries
+// importations
 import (
-	// "os"
+	"os"
 	"fmt"
-	"io/ioutil"
 	"github.com/zserge/webview"
 )
 
 
-// variables
-var src = "src"
-var windowTitle = "nook"
-var windowHeight = 400
-var windowWidth = 800
-var debug = false
-
 // functions
-func printFile(file string) (response string) {
-	content, err := ioutil.ReadFile(file)
+func currentDir() (response string) {
+	dir, err := os.Getwd()
 	if err != nil {
-		fmt.Println("error reading file:", err)
-		return
+		fmt.Println(err)
 	}
-	data := (string(content))
-	return(data)
+	return(dir)
 }
 
-func template() (response string) {
-	head := `<head>` + printFile(src + "/head.html") + `</head>`
-	style := `<style>` + printFile(src + "/css/main.css") + `</style>`
+func irc() {
+	// start the irc backend here
+}
 
-	nav := printFile(src + "/nav.html")
-	buffer := printFile(src + "/buffer.html")
-	script := printFile(src + "/script.html")
-	body := `<body>` + nav + buffer + script + `</body>`
-
-	return(head + style + body)
+func callback() {
+	// put js callbacks here (eg.: on new irc msg, print this, etc)
 }
 
 func view() {
-	w := webview.New(debug)
+	windowTitle := "nook"
+	windowHeight := 400
+	windowWidth := 800
+
+	w := webview.New(true)
 
 	w.SetTitle(windowTitle)
 	w.SetSize(windowWidth, windowHeight, webview.HintFixed)
-	w.Navigate(`data:text/html, ` + template())
-	w.Init(printFile(src + "/js/main.js"))
+	w.Navigate("file://" + currentDir() + "/view/index.html")
 	w.Run()
 }
 
 
-// main process
+// execution
 func main() {
+	go irc()
+	go callback()
 	view()
 }

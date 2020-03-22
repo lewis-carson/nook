@@ -1,0 +1,148 @@
+//// vars
+// colors
+$color-background: #1F2022;
+$color-background-light: #222325;
+$color-background-dark: #1b1c1d;
+$color-foreground: #B6BAC0;
+$color-foreground-light: #D1D4DA;
+$color-foreground-dark: #878E96;
+$color-foreground-darker: #6e757c;
+$accent: #5b67ec;
+$translucent: rgba(255,255,255,.125);
+
+// sizes
+$xxs: .25rem;
+$xs: .5rem;
+$s: .75rem;
+$rg: 1rem;
+$lg: 1.5rem;
+$xlg: 2rem;
+$xxlg: 3rem;
+$ulg: 5rem;
+
+// etc
+$border: 1px solid $translucent;
+$transition: all 125ms ease-in-out;
+
+
+//// content
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 100vw;
+    height: 100vh;
+    color: $color-foreground;
+    background: $color-background;
+    font-family: "Helvetica Neue", "Helvetica", sans-serif;
+
+    a {
+        color: $color-foreground-dark;
+        text-decoration: none;
+        transition: $transition;
+
+        &:hover {
+            color: $color-foreground-light;
+        }
+    }
+
+    ul {
+        list-style-type: none;
+        line-height: $lg;
+        padding: 0;
+    }
+
+    li {
+        vertical-align: middle;
+    }
+
+    .nav {
+        background: $color-background-dark;
+        color: $color-foreground-light;
+        padding: 0 $lg;
+        border-right: $border;
+        overflow-x: hidden;
+        width: 20vw;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .server {
+            .server-channels {
+                margin: $xs 0 0 $rg;
+
+                .active {
+                    color: $accent;
+                }
+            }
+        }
+    }
+
+    .buffer {
+        display: grid;
+        max-height: 100vh;
+        overflow-x: hidden;
+        grid-column-start: span 5;
+        margin: 0 0 2rem 0;
+
+        .name {
+            display: inline-block;
+            color: $color-foreground-dark;
+            width: 15vw;
+            text-align: right;
+
+            &.msg::after {
+                content: " said";
+                margin: 0 $rg 0 0;
+                color: $color-foreground-darker;
+            }
+
+            &.join::after {
+                content: " joined";
+                margin: 0 $rg 0 0;
+                color: $color-foreground-darker;
+            }
+        }
+
+        .message {
+            width: 65vw;
+            float: right;
+        }
+
+        .hidden {
+            visibility: hidden;
+        }
+
+        .separator {
+            display: flex;
+            justify-content: flex-start;
+            background: $translucent;
+            width: 1px;
+            margin: 0 $rg;
+        }
+    }
+
+
+    .input {
+        width: -webkit-fill-available;
+        position: fixed;
+        bottom: 0;
+        border-top: $border;
+
+        input {
+            width: inherit;
+            padding: $xs;
+            color: $color-foreground;
+            background: $color-background-light;
+            border: 0;
+
+            &:focus, &:active {
+                outline: none;
+            }
+        }
+    }
+}
