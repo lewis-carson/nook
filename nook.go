@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/zserge/webview"
+	ircevent "github.com/thoj/go-ircevent"
 )
 
 // variables
@@ -48,9 +49,19 @@ func view() {
 func irc() {
 	time.Sleep(time.Second * 1) // sleep for 1 second otherwise messages won't load -- needs work
 
-	user := "tom nook"
-	message := "sent from golang!"
-	newMessage(user, message)
+	ircobj := ircevent.IRC("nook", "nook")
+	ircobj.AddCallback("001", func(e *ircevent.Event) {
+		ircobj.Join("#letirc")
+		ircobj.Privmsg("#letirc", "send with <3 from nook")
+		ircobj.AddCallback("PRIVMSG", func(event *ircevent.Event) {
+			go newMessage(event.Nick, event.Message())
+		});
+	})
+	ircobj.Connect("irc.rizon.net:7000")
+
+	//user := "tom nook"
+	//message := "sent from golang!"
+	//newMessage(user, message)
 }
 
 func newMessage(user string, message string) {
