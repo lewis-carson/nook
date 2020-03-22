@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/zserge/webview"
+	"github.com/thoj/go-ircevent"
 )
 
 // variables
@@ -48,31 +49,36 @@ func view() {
 func irc() {
 	time.Sleep(time.Second * 1) // sleep for 1 second otherwise messages won't load -- needs work
 
-	user := "tom nook"
-	message := "sent from golang!"
-	action := "message"
-	newMessage(user, message, action)
+	ircobj := ircevent.IRC("nook", "nook")
+	ircobj.AddCallback("001", func(e *ircevent.Event) {
+		ircobj.Join("#letirc")
+		ircobj.Privmsg("#letirc", "send with <3 from nook")
+		ircobj.AddCallback("PRIVMSG", func(event *ircevent.Event) {
+			go newMessage(event.Nick, event.Message())
+		});
+	})
+	ircobj.Connect("irc.rizon.net:7000")
 }
 
 func newMessage(user string, message string, action string) {
-	js := "newMessage(\"" + user + "\", \"" + message + "\", \"" + action + "\");"
-	inject("message", js)
+    js := "newMessage(\"" + user + "\", \"" + message + "\", \"" + action + "\");"
+    inject("message", js)
 }
 
 func changeChannel(server string, channel string) {
-	wv.Bind("changeChannel", func() {
-		fmt.Println(server, channel)
-	})
+    wv.Bind("changeChannel", func() {
+        fmt.Println(server, channel)
+    })
 }
 
 func inject(action string, js string) {
-	wv.Dispatch(func() {
-		switch action {
-		case "message":
-			wv.Eval(js)
-		}
-		// add other injections here
-	})
+    wv.Dispatch(func() {
+        switch action {
+        case "message":
+            wv.Eval(js)
+        }
+    // add other injections here
+    })
 }
 
 // execution
