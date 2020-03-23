@@ -47,6 +47,12 @@ function currentChannel(server, channel) {
     scrollToBottom("buffer");
 }
 
+//SENDING MESSAGES FROM JS TO GO W/ SOCKET.IO
+const socket = io('http://localhost:5007');
+function sendmessage(server, channel, message){
+    alert("sending message")
+    socket.emit('sendmessage', server, channel, message);
+}
 
 //// exec
 document.addEventListener('DOMContentLoaded', function() {

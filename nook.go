@@ -7,6 +7,7 @@ import (
     "log"
     "net/http"
     "os"
+    "fmt"
     socketio "github.com/googollee/go-socket.io"
     ircevent "github.com/thoj/go-ircevent"
     "github.com/zserge/webview"
@@ -90,6 +91,10 @@ func socket() {
     if err != nil {
         panic(err)
     }
+    server.OnEvent("/", "sendmessage", func(s socketio.Conn, server string, channel string, message string) {
+		fmt.Println("message", message)
+	})
+
     go server.Serve()
     defer server.Close()
 
