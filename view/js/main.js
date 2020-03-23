@@ -1,12 +1,15 @@
-// scroll to the bottom of the buffer when the page has finished loading
+//// functions
 function scrollToBottom(id){
     var element = document.getElementById(id);
     element.scrollTop = element.scrollHeight;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    scrollToBottom("buffer");
-});
+function sendMessage(message) {
+    const form = document.querySelector("#input");
+    const data = Object.fromEntries(new FormData(form).entries());
+    console.log(data);
+    return(data);
+}
 
 function newMessage(user, message, action) {
     log = document.getElementById("log");
@@ -24,3 +27,15 @@ function newMessage(user, message, action) {
     userMessageSpan.appendChild(userMessage);
     scrollToBottom("buffer");
 }
+
+
+//// exec
+document.addEventListener('DOMContentLoaded', function() {
+    scrollToBottom("buffer");
+});
+
+input = document.getElementById("input");
+input.addEventListener('submit', e => {
+    sendMessage();
+    e.preventDefault();
+});
