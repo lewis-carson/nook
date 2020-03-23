@@ -1,0 +1,17 @@
+{
+    "identity": {
+        "nick": "nook",
+        "realName": "tom nook"
+    },
+    "servers": [
+        {
+            "name": "rizon",
+            "address": "irc.rizon.net",
+            "port": "7000",
+            "autoConnect": false,
+            "channels": [
+                "#letirc"
+            ]
+        }
+    ]
+}

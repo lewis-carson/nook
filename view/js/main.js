@@ -3,14 +3,6 @@ function scrollToBottom(id){
     var element = document.getElementById(id);
     element.scrollTop = element.scrollHeight;
 }
-
-function sendMessage(message) {
-    const form = document.querySelector("#input");
-    const data = Object.fromEntries(new FormData(form).entries());
-    console.log(data);
-    return(data);
-}
-
 function newMessage(user, message, action) {
     log = document.getElementById("log");
     line = document.createElement("li");
@@ -19,12 +11,39 @@ function newMessage(user, message, action) {
     userMessageSpan = document.createElement("span");
     userText = document.createTextNode(user);
     userMessage = document.createTextNode(message);
+
     log.appendChild(line);
+
     line.appendChild(userNameSpan).classList.add("name", action)
     userNameSpan.appendChild(userName);
     userName.appendChild(userText);
+
     line.appendChild(userMessageSpan).classList.add("message");
     userMessageSpan.appendChild(userMessage);
+    
+    scrollToBottom("buffer");
+}
+
+function currentChannel(server, channel) {
+    chans = document.getElementById("chans");
+    column = document.createElement("ul");
+    line = document.createElement("li");
+    serverNameSpan = document.createElement("span");
+    serverName = document.createTextNode(server);
+    serverChannelsDiv = document.createElement("div");
+    channelNameLink = document.createElement("a");
+    channelName = document.createTextNode(channel);
+
+    chans.appendChild(column).classList.add("server");
+
+    column.appendChild(serverNameSpan).classList.add("server-name");
+    serverNameSpan.appendChild(serverName);
+
+    column.appendChild(serverChannelsDiv).classList.add("server-channels");
+    serverChannelsDiv.appendChild(line);
+    line.appendChild(channelNameLink).classList.add("active");
+    channelNameLink.appendChild(channelName);
+
     scrollToBottom("buffer");
 }
 
@@ -32,10 +51,4 @@ function newMessage(user, message, action) {
 //// exec
 document.addEventListener('DOMContentLoaded', function() {
     scrollToBottom("buffer");
-});
-
-input = document.getElementById("input");
-input.addEventListener('submit', e => {
-    sendMessage();
-    e.preventDefault();
 });
